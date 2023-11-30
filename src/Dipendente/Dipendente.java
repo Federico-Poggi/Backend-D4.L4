@@ -2,9 +2,9 @@ package Dipendente;
 
 import java.util.Random;
 
-public  class Dipendente {
+public abstract class Dipendente {
 
-    /*----ATTRIBUTI----*/
+    /*---------------------------------ATTRIBUTI--------------------------------------*/
     private static final int salaryMin=1000;
     private double idSalary;
     private short idNumber;
@@ -12,9 +12,9 @@ public  class Dipendente {
     private Dipartimento department;
     private Livello level;
 
-    /*-----------------*/
+    /*-------------------------------------------------------------------------------*/
 
-
+    /*-------------------------------COSTRUTTORI-------------------------------------*/
 
 Random rand=new Random();
     public Dipendente(short IDnumber, double idSalary, float salaryPerHourExtra,
@@ -33,9 +33,9 @@ Random rand=new Random();
     }
 
 
-/* -----METODI----- */
+    /* -----------------------------------------METODI-------------------------------- */
 
-    /*---GET---*/
+    /*----------------------------------------GET--------------------------------------*/
 
     public int getSalaryMin() {
         return this.salaryMin;
@@ -45,11 +45,11 @@ Random rand=new Random();
         return this.idNumber;
     }
 
-    public float getIdSalary() {
+    public double getIdSalary() {
         return this.idSalary;
     }
 
-    public Dipartimento getDepartment() {
+    public  Dipartimento getDepartment() {
         return department;
     }
 
@@ -61,22 +61,21 @@ Random rand=new Random();
         return this.salaryPerHourExtra;
     }
 
+    /*-------------------------------------------------------------------------------------*/
 
 
-    /*---SET---*/
+    /*---------------------------------------------SET-------------------------------------*/
     public void setSalaryPerHourExtra(float salaryPerHourExtra) {
         this.salaryPerHourExtra = salaryPerHourExtra;
     }
 
-    public void setDepartment(Dipartimento department) {
-        this.department = department;
-    }
+    public abstract Dipartimento setDepartment(Dipartimento department);
 
 
-    /*----------*/
+    /*--------------------------------------------------------------------------------------*/
 
 
-
+    /*-----------------------------METODI NON STATICI---------------------------------------*/
     public void datiDipendente(){}
     public Livello promuovi(){
         switch (this.level){
@@ -88,11 +87,25 @@ Random rand=new Random();
                 this.level=Livello.QUADRO;
                 this.idSalary=(this.idSalary*1.5);
             }
-            case
+            case QUADRO -> {
+                this.level=Livello.DIRIGENTE;
+                this.idSalary=(this.idSalary*2);
+            }
+            default -> System.err.println("Non si puo promuovere perche già dirigente");
+
         }
+        return this.level;
     }
 
-    /*----FINE----*/
+    /*--------------------------------------------------------------------------------------*/
+
+    /*---------------------------------------METODI STATICI---------------------------------*/
+//    public static double calcolaPaga(){
+//
+//    }
+
+
+    /*------------------------------------FINE----------------------------------------------*/
 
 }
 
